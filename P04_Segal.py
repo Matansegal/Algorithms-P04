@@ -164,7 +164,7 @@ print('a_range:',a_range)
 
 
 # contine with the Euclidean algorithm:
-while math.log10(high) < 1500:  
+while math.log10(high) < 1000:  
     b = random.randint(low, med)
     a = random.randint(med, high)
     t2 = time.time()
