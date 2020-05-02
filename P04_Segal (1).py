@@ -10,7 +10,7 @@
 # 
 # First, I will implement the trivial solution in order to find the GCD. The trivial solution is simple iteration trough all the integers until we get to the smaller number among the two given integers:
 
-# In[130]:
+# In[10]:
 
 
 def trivial_GCD(a,b):
@@ -24,7 +24,7 @@ def trivial_GCD(a,b):
 
 # Testing the trivial solution for the GCD with 1768 and 255:
 
-# In[131]:
+# In[11]:
 
 
 trivial_GCD(1768,255)
@@ -63,7 +63,7 @@ trivial_GCD(1768,255)
 # 
 # 
 
-# In[132]:
+# In[12]:
 
 
 def GCD(a,b):
@@ -77,7 +77,7 @@ def GCD(a,b):
     return GCD(b,r)
 
 
-# In[133]:
+# In[13]:
 
 
 GCD(1768,255)
@@ -89,7 +89,7 @@ GCD(1768,255)
 # 
 # In order to compare their time performance, I will randomly send two numbers to both function starting with four-digit number and a three-digit number and go up to an nine-digit number and a eight-digit number. Each step I will run 3 time. 
 
-# In[134]:
+# In[14]:
 
 
 import random
@@ -122,7 +122,7 @@ for i in range(6):
     high = high *10
 
 
-# In[135]:
+# In[15]:
 
 
 # continuing just with the euclidean algorith until the sensitivity of the time
@@ -145,7 +145,7 @@ while t == 0:
     high = high *10
 
 
-# In[136]:
+# In[16]:
 
 
 # print the number of digits range on the last iteration
@@ -158,9 +158,9 @@ print('b_range:',b_range)
 print('a_range:',a_range)
 
 
-# It is possible to messure the running time of the Euclidean algorithm just when we are using numbers with more than 31 digits!
+# It is possible to messure the running time of the Euclidean algorithm just when we are using numbers with more than 36 digits!
 
-# In[143]:
+# In[17]:
 
 
 # contine with the Euclidean algorithm:
@@ -177,7 +177,7 @@ while math.log10(high) < 1000:
     high = high *10
 
 
-# In[144]:
+# In[18]:
 
 
 import matplotlib.pyplot as plt
@@ -189,7 +189,7 @@ plt.plot(nonTri, label="Euclidean")
 plt.legend()
 
 
-# Even when calculating the GCD of almost 1500 digit numbers, the Euclidean algorithm's run time is barely measurable! 
+# Even when calculating the GCD of almost 1000 digit numbers, the Euclidean algorithm's run time is barely measurable! 
 
 # ## The extended Euclidean algorithm
 # 
@@ -215,7 +215,7 @@ plt.legend()
 # [2] http://www.math.cmu.edu/~bkell/21110-2010s/extended-euclidean.html
 # 
 
-# In[2]:
+# In[19]:
 
 
 # returns the solution for xa + yb = c and the gcd
@@ -260,13 +260,13 @@ def ex_Euclidean(a,b,c):
     
 
 
-# In[195]:
+# In[20]:
 
 
 l = ex_Euclidean(1180,482,2)
 
 
-# In[196]:
+# In[21]:
 
 
 if l:
@@ -282,24 +282,27 @@ else:
 
 # ### Getting all the solutions
 # The solution we saw above is just one solution among infinite of solutions, so we will represent it as:  
-# ![image.png](attachment:image.png)
 
+# $$a⋅x_0+b⋅y_0=c$$
+# 
 # In order to have the set of all the solutions we will go through the following procedure:
 # We will add $\frac{b}{g}$ to $x_0$ and subtract $\frac{a}{g}$ from $y_0$, where $g$ is $GCD(a,b)$. From the definition of GCD, we know that $\frac{b}{g}$ and $\frac{a}{g}$ must being integers. Our equation will look like:
 # 
-# ![image.png](attachment:image.png)
+# $$a⋅(x_0+b/g)+b⋅(y_0-a/g) = a⋅x_0+b⋅y_0+a⋅b/g-b⋅a/g=c$$
 # 
 # We see that the parts that we added cancel each other and we did not affected the original solution.
 
 # Therefore, we can multiply by any integer k both terms we added and still do not affect the original equation. This bring us to the general set of solutions for the Diophantine equation, which is:
 # 
-# ![image.png](attachment:image.png)
+# $$ x = x_0+k⋅b/g$$
+# $$ y = y_0-k⋅a/g$$
+# **Where k is an integer**
 # 
 # [3] http://e-maxx.ru/algo/diofant_2_equation&usg=ALkJrhhAzF9yCVA7pOjdWhVRIFdPsBlzmA
 # 
 # Below I added a function which give a set of solutions in given range of x and y:
 
-# In[3]:
+# In[22]:
 
 
 # Accept: original solutions (x0,y0), gcd, a, b
@@ -337,7 +340,7 @@ def solution_set(x0, y0, gcd, a, b, range_x=[0,100], range_y=[0,100]):
 # In order to solve this equation we will use the functions of the extended Euclidean algoriths and send the results to the set of solution fucntion:
 # 
 
-# In[255]:
+# In[23]:
 
 
 l = ex_Euclidean(2,6,18)
@@ -356,7 +359,7 @@ solution_set(x0=l[0],y0=l[1],gcd=l[2],a=2,b=6)
 # We can clearly see that the solution for x is 5. Let’s show how the extended Euclidean algorithm will return the solution:
 # 
 
-# In[116]:
+# In[24]:
 
 
 ex_Euclidean(2,9,1)[0]
@@ -368,7 +371,7 @@ ex_Euclidean(2,9,1)[0]
 # For more advanced example we will consider the following equation:
 # $$27x = 1 (mod 392)$$
 
-# In[146]:
+# In[25]:
 
 
 ex_Euclidean(27,392,1)[0]
@@ -378,7 +381,7 @@ ex_Euclidean(27,392,1)[0]
 # 
 # **check:** we will mutiply 27 by our solution 363 and will use mod 392:
 
-# In[118]:
+# In[26]:
 
 
 (27*363) % 392
