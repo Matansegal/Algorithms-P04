@@ -1,28 +1,19 @@
-name: Execute notebook
+name: 20S-3353-PA04
 
 on: [push]
 
 jobs:
-  run:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.x
       uses: actions/setup-python@v1
-    - uses: yaananth/run-notebook@v1
-      env:
-        RUNNER: ${{ toJson(runner) }}
-        SECRETS: ${{ toJson(secrets) }}
-        GITHUB: ${{ toJson(github) }}
       with:
-        notebook: "P04_Segal.ipynb"
-        params: "PATHTOPARAMS.json"
-        isReport: False
-        poll: True
-    - uses: actions/upload-artifact@master
-      if: always()
-      with:
-        name: output
-        path: ${{ RUNNER.temp }}/nb-runner
-      env:
-        RUNNER: ${{ toJson(runner) }}
+        python-version: '3.x' # Semantic version range syntax or exact version of a Python version.
+        architecture: 'x64' # Optional - x64 or x86, defaults to x64
+    # You can test your matrix by printing the current Python version
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
