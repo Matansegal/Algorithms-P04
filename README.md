@@ -3,4 +3,4 @@ The area of algorithm I chose is number theoretic algorithm. The problem I chose
 
 You can find the code of the project in a Jupyter notebook file, a .py file and as an HTML file above.
 
-You can find my video<a href="https://youtu.be/NPTMkSDoRJo">HERE</a>.
+You can find my video <a href="https://youtu.be/NPTMkSDoRJo">HERE</a>.
